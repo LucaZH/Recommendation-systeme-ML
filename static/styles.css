@@ -13,7 +13,9 @@ body {
     padding: 5px 10px;
     margin: 5px;
 }
-
+.genre-container{
+    margin: 5rem;
+}
 .button:hover {
     background-color: #3c4049;
 }
