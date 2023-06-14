@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Recommendations</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Anime Recommendations</h1>
+    <h2>Accuracy: {{ accuracy|round(2) }}</h2>
+    <ol>
+        {% for anime, similarity, genres in zip(recommended_animes["title"], similarity_scores, recommended_animes["genre"]) %}
+            <li>
+                <h3>{{ anime }}</h3>
+                <p>Similarity: {{ similarity|round(2) }}</p>
+                <p>Genres: {{ genres|join(", ") }}</p>
+            </li>
+        {% endfor %}
+    </ol>
+    <a href="/">Try again</a>
+</body>
+</html>
