@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Anime Recommendation</h1>
-
-    {% for genre in all_genres %}
-        <button class="button" data-genre="{{ genre }}">{{ genre }}</button>
-    {% endfor %}
+    
+    <div class="genre-container">
+        <h1>Anime Recommendation</h1>
+        {% for genre in all_genres %}
+            <button class="button" data-genre="{{ genre }}">{{ genre }}</button>
+        {% endfor %}
+    </div>
 
     <div class="results-container" id="results"></div>
 
