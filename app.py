@@ -16,7 +16,7 @@ genre_matrix = mlb.fit_transform(data["genre"])
 
 train_data, test_data = train_test_split(genre_matrix, test_size=0.2, random_state=42)
 
-autoencoder = MLPRegressor(hidden_layer_sizes=(128, 64, 128), max_iter=200, random_state=42)
+autoencoder = MLPRegressor(hidden_layer_sizes=(512, 256, 128, 64, 128, 256, 512), max_iter=200, random_state=42)
 autoencoder.fit(train_data, train_data)
 
 def recommend_anime_with_similarity(genres):
