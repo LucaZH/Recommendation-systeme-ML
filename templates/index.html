@@ -7,59 +7,44 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
+    <h1>Anime Recommendation</h1>
     
-    <div class="genre-container">
-        <h1>Anime Recommendation</h1>
-        {% for genre in all_genres %}
-            <button class="button" data-genre="{{ genre }}">{{ genre }}</button>
-        {% endfor %}
-    </div>
+    <form method="POST" action="/">
+        <div class="genre-container">
+            <h2>Select your favorite genres:</h2>
+            {% for genre in all_genres %}
+                <label><input type="checkbox" name="user_genres" value="{{ genre }}"> {{ genre }}</label>
+            {% endfor %}
+        </div>
 
-    <div class="results-container" id="results"></div>
+        <div class="mb-3">
+            <h2>Or enter a vague description of the anime you like:</h2>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Recommend Anime</button>
+    </form>
 
-    <script>
-        const genreButtons = document.querySelectorAll(".button");
-        const resultsDiv = document.getElementById("results");
-
-        genreButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-                button.classList.toggle("button-selected");
-                recommendAnimes();
-            });
-        });
-
-        function recommendAnimes() {
-            const selectedGenres = Array.from(genreButtons)
-                .filter((button) => button.classList.contains("button-selected"))
-                .map((button) => button.dataset.genre);
-
-            fetch("/recommend", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: new URLSearchParams({ user_genres: selectedGenres.join(", ") }),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    const recommendedAnimes = data.results;
-                    const cards = recommendedAnimes.map((anime) => createAnimeCard(anime)).join("");
-                    resultsDiv.innerHTML = cards;
-                });
-        }
-
-        function createAnimeCard(anime) {
-            return `
-                <div class="anime-card">
-                    <img src="${anime.img_url}" alt="${anime.title}" class="anime-image">
-                    <div class="anime-title">${anime.title}</div>
-                    <div class="anime-genre">${anime.genre.join(", ")}</div>
-                    <div class="anime-synopsis">${anime.synopsis}</div>
-                    <a href="${anime.link}" target="_blank" class="anime-link">View on MyAnimeList</a>
-                </div>
-            `;
-        }
-    </script>
+    {% if not recommended_animes.empty %}
+        <h2>Recommended Animes:</h2>
+        <table class="anime-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Genres</th>
+                    <th>Similarity Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for anime, score in zip(recommended_animes.iterrows(), top_similarity_scores) %}
+                    <tr>
+                        <td><a href="{{ anime[1].link }}" target="_blank">{{ anime[1].title }}</a></td>
+                        <td>{{ ", ".join(anime[1].genre) }}</td>
+                        <td>{{ "%.2f" | format(score) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 </body>
 </html>
 

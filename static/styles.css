@@ -1,73 +1,70 @@
 body {
+    font-family: Arial, sans-serif;
     background-color: #1a1b26;
     color: #a9b1d6;
-    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.button {
-    background-color: #24283b;
-    border: none;
-    border-radius: 5px;
-    color: #a9b1d6;
-    cursor: pointer;
-    padding: 5px 10px;
-    margin: 5px;
-}
-.genre-container{
-    margin: 5rem;
-}
-.button:hover {
-    background-color: #3c4049;
+h1, h2 {
+    color: #7aa2f7;
 }
 
-.button-selected {
-    background-color: #7aa2f7;
-    color: #1a1b26;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.results-container {
+form {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.submit-btn {
+    background-color: #414868;
+    color: #a9b1d6;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #7aa2f7;
+}
+
+.anime-table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
 }
 
-.anime-card {
-    background-color: #24283b;
-    border-radius: 5px;
-    margin: 10px;
+.anime-table th,
+.anime-table td {
+    border: 1px solid #414868;
     padding: 10px;
-    width: 300px;
+    text-align: left;
 }
 
-.anime-image {
-    height: 200px;
-    object-fit: cover;
-    width: 100%;
-}
-
-.anime-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.anime-genre {
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.anime-synopsis {
-    font-size: 12px;
-    margin-bottom: 10px;
-}
-
-.anime-link {
-    color: #7aa2f7;
-    font-size: 12px;
+.anime-table a {
+    color: #a9b1d6;
     text-decoration: none;
 }
 
-.anime-link:hover {
-    text-decoration: underline;
+.anime-table a:hover {
+    color: #7aa2f7;
+}
+
+.anime-table thead {
+    background-color: #414868;
+}
+
+.anime-table tbody tr:nth-child(odd) {
+    background-color: #2e3141;
+}
+
+.anime-table tbody tr:nth-child(even) {
+    background-color: #1a1b26;
 }
